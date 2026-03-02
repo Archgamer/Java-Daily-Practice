@@ -2,5 +2,4 @@
 # 26/02/27
 Two Sum
 # 26/03/02
-ContainMostWater
-LongCommonPrefix
+ContainMostWater n/ LongCommonPrefix
