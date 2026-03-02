@@ -1,2 +1,6 @@
-## TWO SUM
-# 26/2/27
+## JAVA DAILY PRACTICE
+# 26/02/27
+Two Sum
+# 26/03/02
+ContainMostWater
+LongCommonPrefix
