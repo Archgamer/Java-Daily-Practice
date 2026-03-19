@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class CombinationSum {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        
+        // 启动回溯搜索
+        backtrack(candidates, target, 0, path, res);
+        return res;
+    }
+
+    /**
+     * @param candidates 候选数组
+     * @param remain     剩余目标值
+     * @param start      起始索引（核心：防止产生重复排列）
+     * @param path       当前路径（已选数字组合）
+     * @param res        结果集
+     */
+    private void backtrack(int[] candidates, int remain, int start, List<Integer> path, List<List<Integer>> res) {
+        // --- 终止条件 1：找到一个可行解 ---
+        if (remain == 0) {
+            // 重要：必须新建一个 ArrayList 存入结果，否则 path 变化会导致 res 里的内容也跟着变
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        // --- 终止条件 2：超过目标值（剪枝） ---
+        if (remain < 0) {
+            return;
+        }
+
+        // --- 遍历候选数字 ---
+        for (int i = start; i < candidates.length; i++) {
+            // 1. 做出选择
+            path.add(candidates[i]);
+
+            // 2. 递归探索
+            // 传入 i 而不是 i + 1，表示同一个数字可以重复选取
+            backtrack(candidates, remain - candidates[i], i, path, res);
+
+            // 3. 撤销选择（回溯）
+            // 移除路径中最后一个元素，回到分叉口
+            path.remove(path.size() - 1);
+        }
+    }
+}
